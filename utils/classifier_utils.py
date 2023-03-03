@@ -48,7 +48,7 @@ def plot_coefs(coefficients, nclasses):
     for i in range(nclasses):
         p = plt.subplot(1, nclasses, i + 1)
         p = plt.imshow(coefficients[i].reshape(28, 28),
-                      cmap=plt.cm.RdBu, vmin=-scale, vmax=scale)
+                      cmap = plt.cm.get_cmap("RdBu_r"), vmin=-scale, vmax=scale)
         p = plt.axis('off')
         p = plt.title('Class %i' % i)
         
@@ -84,6 +84,7 @@ def plot_probs(X, sample_idx, model, classes):
     exps = [np.exp(z[k])/1+np.exp(z[k]) for k in range(10)]
     exps_sum = np.sum(exps)
     probs = exps/exps_sum
+    
     #plot
     sns.barplot(x=classes, y=probs);
     plt.ylabel("Probability");
@@ -92,6 +93,7 @@ def plot_probs(X, sample_idx, model, classes):
     #predictied label
     idx_cls = np.argmax(probs)
     print(f"I think that this is class {classes[idx_cls]}")
+    print(abs(probs))
     
     return None
 
